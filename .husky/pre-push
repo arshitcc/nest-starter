@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+echo "Running pre-push checks..."
+
+npm run build
+
+if [ $? -ne 0 ]; then
+  echo "Build failed ❌"
+  exit 1
+fi
+
+npm run test:e2e
+
+if [ $? -ne 0 ]; then
+  echo "E2E tests failed ❌"
+  exit 1
+fi
+
+echo "Pre-push checks passed ✅"

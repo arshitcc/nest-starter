@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+echo "Running commit-msg checks ⧗.⧗.⧗" 
+
+npx --no-install commitlint --edit "$1" 2>/dev/null || { 
+  echo "Commit-msg checks failed ❌. Write a commit message."; 
+  exec < /dev/tty && npx cz --hook || true; 
+  exit 1; 
+} 
+
+echo "Commit-msg checks passed ✅"
